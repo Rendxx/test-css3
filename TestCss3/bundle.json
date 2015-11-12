@@ -14,7 +14,8 @@
       "src": "src/less",
       "dest": "css",
       "slider": "slider",
-      "loader": "loader"
+      "loader": "loader",
+      "toX": "toX"
     }
   },
 
@@ -28,7 +29,8 @@
     },
     "less": {
       "#slider#/sample": [ "#slider#/sample.less" ],
-      "#loader#/sample": [ "#loader#/sample.less" ]
+      "#loader#/sample": [ "#loader#/sample.less" ],
+      "#toX#/sample": [ "#toX#/sample.less" ]
     },
     "js": {
     }

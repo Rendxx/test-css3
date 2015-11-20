@@ -14,6 +14,8 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="ash space\sample.html" />
+    <Content Include="ash space\sample.js" />
     <Content Include="dice\sample.html" />
     <Content Include="dice\sample.js" />
     <Content Include="gulpfile.js" />
@@ -36,6 +38,7 @@
     <Content Include="toX\sample.less" />
     <Content Include="fade\sample.less" />
     <Content Include="dice\sample.less" />
+    <Content Include="ash space\sample.less" />
     <None Include="slider\sample.less" />
     <None Include="package.json" />
   </ItemGroup>

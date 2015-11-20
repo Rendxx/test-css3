@@ -14,8 +14,12 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="ash space\ash_texture.png" />
+    <Content Include="ash space\ash.html" />
+    <Content Include="ash space\ash.js" />
     <Content Include="ash space\sample.html" />
     <Content Include="ash space\sample.js" />
+    <Content Include="ash space\tran_texture.png" />
     <Content Include="dice\sample.html" />
     <Content Include="dice\sample.js" />
     <Content Include="gulpfile.js" />

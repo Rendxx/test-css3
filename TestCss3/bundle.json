@@ -17,7 +17,8 @@
       "loader": "loader",
       "toX": "toX",
       "fade": "fade",
-      "dice": "dice"
+      "dice": "dice",
+      "ash": "ash space"
     }
   },
 
@@ -34,7 +35,8 @@
       "#loader#/sample": [ "#loader#/sample.less" ],
       "#toX#/sample": [ "#toX#/sample.less" ],
       "#fade#/sample": [ "#fade#/sample.less" ],
-      "#dice#/sample": [ "#dice#/sample.less" ]
+      "#dice#/sample": [ "#dice#/sample.less" ],
+      "#ash#/sample": [ "#ash#/sample.less" ]
     },
     "js": {
     }

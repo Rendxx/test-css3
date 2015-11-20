@@ -16,7 +16,8 @@
       "slider": "slider",
       "loader": "loader",
       "toX": "toX",
-      "fade": "fade"
+      "fade": "fade",
+      "dice": "dice"
     }
   },
 
@@ -32,7 +33,8 @@
       "#slider#/sample": [ "#slider#/sample.less" ],
       "#loader#/sample": [ "#loader#/sample.less" ],
       "#toX#/sample": [ "#toX#/sample.less" ],
-      "#fade#/sample": [ "#fade#/sample.less" ]
+      "#fade#/sample": [ "#fade#/sample.less" ],
+      "#dice#/sample": [ "#dice#/sample.less" ]
     },
     "js": {
     }

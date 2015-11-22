@@ -70,7 +70,20 @@ $(function () {
 });
 
 
-var Particle = function () {
+var Particle = function (containor) {
     var _html = '<div class="particle"><div class="texture texture-1"></div><div class="texture texture-2"></div><div class="texture texture-3"></div><div class="texture texture-4"></div></div>';
+    var ele = null;
+    var face_1 = null;
+    var face_2 = null;
+    var face_3 = null;
+    var face_4 = null;
 
+    var _create = function () {
+        ele = $(_html).appendTo(scene);
+        face_1 = ele.children('.texture-1');
+        face_2 = ele.children('.texture-2');
+        face_3 = ele.children('.texture-3');
+        face_4 = ele.children('.texture-4');
+
+    };
 };

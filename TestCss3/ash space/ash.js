@@ -66,7 +66,8 @@ $(function () {
 
     //////////////////////////////////
 
-    ashEle = _createAsh(10, 0, 0, 0);
+    //ashEle = _createAsh(10, 0, 0, 0);
+    var ash = new Particle(scene);
 });
 
 
@@ -79,11 +80,19 @@ var Particle = function (containor) {
     var face_4 = null;
 
     var _create = function () {
-        ele = $(_html).appendTo(scene);
+        ele = $(_html).appendTo(containor);
         face_1 = ele.children('.texture-1');
         face_2 = ele.children('.texture-2');
         face_3 = ele.children('.texture-3');
         face_4 = ele.children('.texture-4');
 
     };
+
+    this.translate = function (opts) {
+
+    };
+
+    var _init = function () {
+        _create()
+    }();
 };

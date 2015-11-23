@@ -8,7 +8,10 @@
     };
     var ashTransform = [];
     var ashEle = [];
-    var count = 100;
+    var count = 500;
+    var interval = 1000;
+    var group = 0;
+    var groupCount = 50;
 
     // button control
     $('.btn-front').click(function () {
@@ -41,23 +44,31 @@
     };
 
     var _render = function () {
-        for (var i = 0; i < count; i++) {
-            var transform = 'rotateX(' + sceneRotate.x + 'deg) rotateY(' + sceneRotate.y + 'deg) rotateZ(' + sceneRotate.z + 'deg) translateX(' + ashTransform[i].x + 'px) translateY(' + ashTransform[i].y + 'px) translateZ(' + ashTransform[i].z + 'px) scale(' + ashTransform[i].scale + ')';
-            ashEle[i].css({
-                'transform': transform
-            });
+        scene.css({
+            'transform': 'rotateX(' + sceneRotate.x + 'deg) rotateY(' + sceneRotate.y + 'deg) rotateZ(' + sceneRotate.z + 'deg)'
+        });
+    };
+
+    var startMove = function () {
+        for (var i = group * groupCount, l = i + groupCount; i < l; i++) {
+            ashEle[i].children('.ash-inner').css('transform', _data.moveClass[Math.floor(getRandom(12))]);
         }
+        group = (group + 1) % 10;
     };
 
     var build = function (scene, count) {
         for (var i = 0; i < count; i++) {
             ashTransform[i] ={
-                scale: getRandom(_data.range.scale) + 0.5,
+                scale: getRandom(_data.range.scale) + 0.25,
                 x: Math.floor(getRandom(_data.range.x)),
                 y: Math.floor(getRandom(_data.range.y)),
                 z: Math.floor(getRandom(_data.range.z))
             };
             ashEle[i] = $(_data.html.ash).appendTo(scene);
+            var transform = 'translate3D(' + ashTransform[i].x + 'px ,' + ashTransform[i].y + 'px ,' + ashTransform[i].z + 'px) scale3d(' + ashTransform[i].scale + ',' + ashTransform[i].scale + ',' + ashTransform[i].scale + ')';
+            ashEle[i].css({
+                'transform': transform
+            });
         }
         _render();
     };
@@ -65,17 +76,33 @@
     // parameter
     var _data = {
         html: {
-            ash: '<div class="ash"><div class="texture texture-x"></div><div class="texture texture-y"></div><div class="texture texture-z"></div></div>'
+            ash: '<div class="ash"><div class="ash-inner"><div class="texture texture-x"></div><div class="texture texture-y"></div><div class="texture texture-z"></div></div></div>'
         },
         range: {
-            scale: 0.25,
+            scale: 0.2,
             x: 400,
             y: 300,
             z: 1500
-        }
+        },
+        moveClass: [
+            'translate3d(0, 0, 0)',
+            'translate3d(-30px, 30px, 30px)',
+            'translate3d(30px, -30px, 30px)',
+            'translate3d(30px, 30px, -30px)',
+            'translate3d(30px, -30px, -30px)',
+            'translate3d(-30px, 30px, -30px)',
+            'translate3d(-30px, -30px, 30px)',
+            'translate3d(-30px, -30px, -30px)',
+            'translate3d(30px, 30px, 30px)',
+            'translate3d(0, -30px, 50px)',
+            'translate3d(-50px, 0, 30px)',
+            'translate3d(-30px, 50px, 0)'
+        ]
     }
 
     //////////////////////////////////
 
     build(scene, count);
+    startMove();
+    setInterval(startMove, interval);
 });

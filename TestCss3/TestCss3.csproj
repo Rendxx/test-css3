@@ -15,8 +15,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="ash space\ash_texture.png" />
-    <Content Include="ash space\ash.html" />
-    <Content Include="ash space\ash.js" />
+    <Content Include="ash space\cone.html" />
+    <Content Include="ash space\cone.js" />
     <Content Include="ash space\sample.html" />
     <Content Include="ash space\sample.js" />
     <Content Include="ash space\tran_texture.png" />
@@ -36,6 +36,7 @@
     <Folder Include="lib\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ash space\cone.less" />
     <None Include="bower.json" />
     <None Include="bundle.json" />
     <Content Include="loader\sample.less" />

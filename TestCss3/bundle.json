@@ -36,7 +36,8 @@
       "#toX#/sample": [ "#toX#/sample.less" ],
       "#fade#/sample": [ "#fade#/sample.less" ],
       "#dice#/sample": [ "#dice#/sample.less" ],
-      "#ash#/sample": [ "#ash#/sample.less" ]
+      "#ash#/sample": [ "#ash#/sample.less" ],
+      "#ash#/cone": [ "#ash#/cone.less" ]
     },
     "js": {
     }

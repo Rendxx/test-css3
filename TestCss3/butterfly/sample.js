@@ -1,5 +1,6 @@
 ﻿$(function () {
     // data
+    var scene = $('.containor')
     var butterfly = $('.butterfly');
     var sceneRotate = {
         x: 0,
@@ -12,7 +13,7 @@
         z: 0
     };
 
-    // controller
+    // button control
     $('.btn-front').click(function () {
         sceneRotate.z -= 10;
         _render();
@@ -38,7 +39,11 @@
         _render();
     });
 
+    // mouse control
 
+
+
+    // function
     var _render = function () {
         butterfly.css({
             'transform': 'rotateX(' + sceneRotate.x + 'deg) rotateY(' + sceneRotate.y + 'deg) rotateZ(' + sceneRotate.z + 'deg) translate3D(' + sceneTranslate.x + 'px, ' + sceneTranslate.y + 'px, ' + sceneTranslate.z + 'px)'

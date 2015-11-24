@@ -42,8 +42,8 @@
     position: relative;
     margin: 40px auto;
     border: 1px solid #ddd;
-    width: 400px;
-    height: 400px;
+    width: 800px;
+    height: 500px;
     display: block;
     -moz-perspective: 1000px;
     -ms-perspective: 1000px;
@@ -66,8 +66,8 @@
         transition: 0.3s ease-in-out;
 
         .body_ {
-            @size-h: 50px;
-            @size-w: 10px;
+            @size-h: 30px;
+            @size-w: 3px;
 
             width: @size-w*2;
             height: @size-h*2;
@@ -98,7 +98,7 @@
                 backface-visibility: hidden;
 
                 &.front_ {
-                    margin-top:40px;
+                    margin-top:@size-h - @size-w;
                     width: @size-w*2;
                     height: @size-w*2;
                     -moz-transform: rotateX( 90deg ) translateZ(@size-h);
@@ -109,7 +109,7 @@
                 }
 
                 &.back_ {
-                    margin-top:40px;
+                    margin-top:@size-h - @size-w;
                     width: @size-w*2;
                     height: @size-w*2;
                     -moz-transform: rotateX( -90deg ) translateZ(@size-h);
@@ -155,7 +155,8 @@
 
         .wing_ {
             @size-h: 100px;
-            @size-w: 80px;
+            @size-w: 60px;
+            @offset: 2px;
 
             width: @size-w*2;
             height: @size-h*2;
@@ -169,7 +170,7 @@
 
             &.left_ {
                 right: 50%;
-                margin-right: 3px;
+                margin-right: @offset;
 
                 .side_ {
                     position: absolute;
@@ -203,7 +204,7 @@
 
             &.right_ {
                 left: 50%;
-                margin-left: 3px;
+                margin-left: @offset;
 
                 .side_ {
                     position: absolute;

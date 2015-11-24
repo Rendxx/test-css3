@@ -45,193 +45,207 @@
     width: 800px;
     height: 500px;
     display: block;
-    -moz-perspective: 1000px;
-    -ms-perspective: 1000px;
-    -webkit-perspective: 1000px;
-    perspective: 1000px;
+    overflow: hidden;
 
-    .butterfly {
+    .scene {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 200px;
-        height: 200px;
-        margin-top: -100px;
-        margin-left: -100px;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        -moz-perspective: 1000px;
+        -ms-perspective: 1000px;
+        -webkit-perspective: 1000px;
+        perspective: 1000px;
+        margin: 0;
+        padding: 0;
+        border: 0;
         -webkit-transform-style: preserve-3d;
         transform-style: preserve-3d;
-        -moz-transition: 0.3s ease-in-out;
-        -o-transition: 0.3s ease-in-out;
-        -webkit-transition: 0.3s ease-in-out;
-        transition: 0.3s ease-in-out;
 
-        .body_ {
-            @size-h: 30px;
-            @size-w: 3px;
-
-            width: @size-w*2;
-            height: @size-h*2;
+        .butterfly {
             position: absolute;
             top: 50%;
             left: 50%;
-            display: block;
-            margin: 0;
-            margin-top: -@size-h;
-            margin-left: -@size-w;
+            width: 200px;
+            height: 200px;
+            margin-top: -100px;
+            margin-left: -100px;
             -webkit-transform-style: preserve-3d;
             transform-style: preserve-3d;
+            -moz-transition: 0.3s ease-in-out;
+            -o-transition: 0.3s ease-in-out;
+            -webkit-transition: 0.3s ease-in-out;
+            transition: 0.3s ease-in-out;
 
-            .side_ {
+            .body_ {
+                @size-h: 30px;
+                @size-w: 3px;
+
+                width: @size-w*2;
+                height: @size-h*2;
                 position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
+                top: 50%;
+                left: 50%;
+                display: block;
                 margin: 0;
-                padding: 0;
-                border: 0;
+                margin-top: -@size-h;
+                margin-left: -@size-w;
                 -webkit-transform-style: preserve-3d;
                 transform-style: preserve-3d;
-                background-color: #333;
-                -moz-backface-visibility: hidden;
-                -webkit-backface-visibility: hidden;
-                backface-visibility: hidden;
 
-                &.front_ {
-                    margin-top:@size-h - @size-w;
-                    width: @size-w*2;
-                    height: @size-w*2;
-                    -moz-transform: rotateX( 90deg ) translateZ(@size-h);
-                    -ms-transform: rotateX( 90deg ) translateZ(@size-h);
-                    -o-transform: rotateX( 90deg ) translateZ(@size-h);
-                    -webkit-transform: rotateX( 90deg ) translateZ(@size-h);
-                    transform: rotateX( 90deg ) translateZ(@size-h);
+                .side_ {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    margin: 0;
+                    padding: 0;
+                    border: 0;
+                    -webkit-transform-style: preserve-3d;
+                    transform-style: preserve-3d;
+                    background-color: #333;
+                    -moz-backface-visibility: hidden;
+                    -webkit-backface-visibility: hidden;
+                    backface-visibility: hidden;
+
+                    &.front_ {
+                        margin-top: @size-h - @size-w;
+                        width: @size-w*2;
+                        height: @size-w*2;
+                        -moz-transform: rotateX( 90deg ) translateZ(@size-h);
+                        -ms-transform: rotateX( 90deg ) translateZ(@size-h);
+                        -o-transform: rotateX( 90deg ) translateZ(@size-h);
+                        -webkit-transform: rotateX( 90deg ) translateZ(@size-h);
+                        transform: rotateX( 90deg ) translateZ(@size-h);
+                    }
+
+                    &.back_ {
+                        margin-top: @size-h - @size-w;
+                        width: @size-w*2;
+                        height: @size-w*2;
+                        -moz-transform: rotateX( -90deg ) translateZ(@size-h);
+                        -ms-transform: rotateX( -90deg ) translateZ(@size-h);
+                        -o-transform: rotateX( -90deg ) translateZ(@size-h);
+                        -webkit-transform: rotateX( -90deg ) translateZ(@size-h);
+                        transform: rotateX( -90deg ) translateZ(@size-h);
+                    }
+
+                    &.right_ {
+                        -moz-transform: rotateY( 90deg ) translateZ(@size-w);
+                        -ms-transform: rotateY( 90deg ) translateZ(@size-w);
+                        -o-transform: rotateY( 90deg ) translateZ(@size-w);
+                        -webkit-transform: rotateY( 90deg ) translateZ(@size-w);
+                        transform: rotateY( 90deg ) translateZ(@size-w);
+                    }
+
+                    &.left_ {
+                        -moz-transform: rotateY( -90deg ) translateZ(@size-w);
+                        -ms-transform: rotateY( -90deg ) translateZ(@size-w);
+                        -o-transform: rotateY( -90deg ) translateZ(@size-w);
+                        -webkit-transform: rotateY( -90deg ) translateZ(@size-w);
+                        transform: rotateY( -90deg ) translateZ(@size-w);
+                    }
+
+                    &.top_ {
+                        -moz-transform: rotateY(0deg) translateZ(@size-w);
+                        -ms-transform: rotateY(0deg) translateZ(@size-w);
+                        -o-transform: rotateY(0deg) translateZ(@size-w);
+                        -webkit-transform: rotateY(0deg) translateZ(@size-w);
+                        transform: rotateY(0deg) translateZ(@size-w);
+                    }
+
+                    &.bottom_ {
+                        -moz-transform: rotateX( 180deg ) translateZ(@size-w);
+                        -ms-transform: rotateX( 180deg ) translateZ(@size-w);
+                        -o-transform: rotateX( 180deg ) translateZ(@size-w);
+                        -webkit-transform: rotateX( 180deg ) translateZ(@size-w);
+                        transform: rotateX( 180deg ) translateZ(@size-w);
+                    }
                 }
+            }
 
-                &.back_ {
-                    margin-top:@size-h - @size-w;
-                    width: @size-w*2;
-                    height: @size-w*2;
-                    -moz-transform: rotateX( -90deg ) translateZ(@size-h);
-                    -ms-transform: rotateX( -90deg ) translateZ(@size-h);
-                    -o-transform: rotateX( -90deg ) translateZ(@size-h);
-                    -webkit-transform: rotateX( -90deg ) translateZ(@size-h);
-                    transform: rotateX( -90deg ) translateZ(@size-h);
+            .wing_ {
+                @size-h: 100px;
+                @size-w: 60px;
+                @offset: 2px;
+
+                width: @size-w*2;
+                height: @size-h*2;
+                position: absolute;
+                top: 50%;
+                display: block;
+                margin: 0;
+                margin-top: -@size-h;
+                -webkit-transform-style: preserve-3d;
+                transform-style: preserve-3d;
+
+                &.left_ {
+                    right: 50%;
+                    margin-right: @offset;
+
+                    .side_ {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        margin: 0;
+                        padding: 0;
+                        border: 0;
+                        -webkit-transform-style: preserve-3d;
+                        transform-style: preserve-3d;
+                        -moz-backface-visibility: hidden;
+                        -webkit-backface-visibility: hidden;
+                        backface-visibility: hidden;
+
+                        &.up_ {
+                            background-color: #ff6a00;
+                        }
+
+                        &.down_ {
+                            background-color: #006bff;
+                            -moz-transform: rotateX( 180deg );
+                            -ms-transform: rotateX( 180deg );
+                            -o-transform: rotateX( 180deg );
+                            -webkit-transform: rotateX( 180deg );
+                            transform: rotateX( 180deg );
+                        }
+                    }
                 }
 
                 &.right_ {
-                    -moz-transform: rotateY( 90deg ) translateZ(@size-w);
-                    -ms-transform: rotateY( 90deg ) translateZ(@size-w);
-                    -o-transform: rotateY( 90deg ) translateZ(@size-w);
-                    -webkit-transform: rotateY( 90deg ) translateZ(@size-w);
-                    transform: rotateY( 90deg ) translateZ(@size-w);
-                }
+                    left: 50%;
+                    margin-left: @offset;
 
-                &.left_ {
-                    -moz-transform: rotateY( -90deg ) translateZ(@size-w);
-                    -ms-transform: rotateY( -90deg ) translateZ(@size-w);
-                    -o-transform: rotateY( -90deg ) translateZ(@size-w);
-                    -webkit-transform: rotateY( -90deg ) translateZ(@size-w);
-                    transform: rotateY( -90deg ) translateZ(@size-w);
-                }
+                    .side_ {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        margin: 0;
+                        padding: 0;
+                        border: 0;
+                        -webkit-transform-style: preserve-3d;
+                        transform-style: preserve-3d;
+                        -moz-backface-visibility: hidden;
+                        -webkit-backface-visibility: hidden;
+                        backface-visibility: hidden;
 
-                &.top_ {
-                    -moz-transform: rotateY(0deg) translateZ(@size-w);
-                    -ms-transform: rotateY(0deg) translateZ(@size-w);
-                    -o-transform: rotateY(0deg) translateZ(@size-w);
-                    -webkit-transform: rotateY(0deg) translateZ(@size-w);
-                    transform: rotateY(0deg) translateZ(@size-w);
-                }
+                        &.up_ {
+                            background-color: #ff6a00;
+                        }
 
-                &.bottom_ {
-                    -moz-transform: rotateX( 180deg ) translateZ(@size-w);
-                    -ms-transform: rotateX( 180deg ) translateZ(@size-w);
-                    -o-transform: rotateX( 180deg ) translateZ(@size-w);
-                    -webkit-transform: rotateX( 180deg ) translateZ(@size-w);
-                    transform: rotateX( 180deg ) translateZ(@size-w);
-                }
-            }
-        }
-
-        .wing_ {
-            @size-h: 100px;
-            @size-w: 60px;
-            @offset: 2px;
-
-            width: @size-w*2;
-            height: @size-h*2;
-            position: absolute;
-            top: 50%;
-            display: block;
-            margin: 0;
-            margin-top: -@size-h;
-            -webkit-transform-style: preserve-3d;
-            transform-style: preserve-3d;
-
-            &.left_ {
-                right: 50%;
-                margin-right: @offset;
-
-                .side_ {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    margin: 0;
-                    padding: 0;
-                    border: 0;
-                    -webkit-transform-style: preserve-3d;
-                    transform-style: preserve-3d;
-                    -moz-backface-visibility: hidden;
-                    -webkit-backface-visibility: hidden;
-                    backface-visibility: hidden;
-
-                    &.up_ {
-                        background-color: #ff6a00;
-                    }
-
-                    &.down_ {
-                        background-color: #006bff;
-                        -moz-transform: rotateX( 180deg );
-                        -ms-transform: rotateX( 180deg );
-                        -o-transform: rotateX( 180deg );
-                        -webkit-transform: rotateX( 180deg );
-                        transform: rotateX( 180deg );
-                    }
-                }
-            }
-
-            &.right_ {
-                left: 50%;
-                margin-left: @offset;
-
-                .side_ {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    margin: 0;
-                    padding: 0;
-                    border: 0;
-                    -webkit-transform-style: preserve-3d;
-                    transform-style: preserve-3d;
-                    -moz-backface-visibility: hidden;
-                    -webkit-backface-visibility: hidden;
-                    backface-visibility: hidden;
-
-                    &.up_ {
-                        background-color: #ff6a00;
-                    }
-
-                    &.down_ {
-                        background-color: #006bff;
-                        -moz-transform: rotateX( 180deg );
-                        -ms-transform: rotateX( 180deg );
-                        -o-transform: rotateX( 180deg );
-                        -webkit-transform: rotateX( 180deg );
-                        transform: rotateX( 180deg );
+                        &.down_ {
+                            background-color: #006bff;
+                            -moz-transform: rotateX( 180deg );
+                            -ms-transform: rotateX( 180deg );
+                            -o-transform: rotateX( 180deg );
+                            -webkit-transform: rotateX( 180deg );
+                            transform: rotateX( 180deg );
+                        }
                     }
                 }
             }

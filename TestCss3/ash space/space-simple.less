@@ -50,7 +50,7 @@
     overflow: hidden;
 
     .scene {
-        z-index:1;
+        z-index: 1;
         position: relative;
         width: 100%;
         height: 100%;
@@ -61,6 +61,9 @@
         -o-transition: 1s;
         -webkit-transition: 1s;
         transition: 1s;
+        -moz-backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
 
         .ash {
             position: absolute;
@@ -85,6 +88,9 @@
                 -o-transition: 1s;
                 -webkit-transition: 1s;
                 transition: 1s;
+                -moz-backface-visibility: hidden;
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
 
                 .texture {
                     margin: 0;
@@ -102,7 +108,7 @@
             }
         }
 
-        .squ{
+        .squ {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -110,60 +116,60 @@
             height: 60px;
             margin-top: -30px;
             margin-left: -30px;
-            background-color:#ff6a00;
+            background-color: #ff6a00;
         }
     }
 
-    .sensor{
-        z-index:2;
+    .sensor {
+        z-index: 2;
         position: absolute;
         width: 33.3%;
         height: 33.3%;
         display: block;
 
-        &.topLeft_{
-            top:0;
-            left:0;
+        &.topLeft_ {
+            top: 0;
+            left: 0;
         }
 
-        &.topMid_{
-            top:0;
-            left:33.3%;
+        &.topMid_ {
+            top: 0;
+            left: 33.3%;
         }
 
-        &.topRight_{
-            top:0;
-            left:66.6%;
+        &.topRight_ {
+            top: 0;
+            left: 66.6%;
         }
 
-        &.midLeft_{
-            top:33.3%;
-            left:0;
+        &.midLeft_ {
+            top: 33.3%;
+            left: 0;
         }
 
-        &.midMid_{
-            top:33.3%;
-            left:33.3%;
+        &.midMid_ {
+            top: 33.3%;
+            left: 33.3%;
         }
 
-        &.midRight_{
-            top:33.3%;
-            left:66.6%;
+        &.midRight_ {
+            top: 33.3%;
+            left: 66.6%;
         }
 
-        &.btmLeft_{
-            top:66.6%;
-            left:0;
+        &.btmLeft_ {
+            top: 66.6%;
+            left: 0;
         }
 
-        &.btmMid_{
-            top:66.6%;
-            left:33.3%;
+        &.btmMid_ {
+            top: 66.6%;
+            left: 33.3%;
         }
 
-        &.btmRight_{
-            top:66.6%;
-            left:66.6%;
+        &.btmRight_ {
+            top: 66.6%;
+            left: 66.6%;
         }
     }
 }

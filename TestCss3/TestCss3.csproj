@@ -17,8 +17,10 @@
     <Content Include="ash space\ash_texture.png" />
     <Content Include="ash space\cone.html" />
     <Content Include="ash space\cone.js" />
+    <Content Include="ash space\space-simple.html" />
+    <Content Include="ash space\sample .js" />
     <Content Include="ash space\sample.html" />
-    <Content Include="ash space\sample.js" />
+    <Content Include="ash space\space-simple.js" />
     <Content Include="ash space\tran_texture.png" />
     <Content Include="dice\sample.html" />
     <Content Include="dice\sample.js" />
@@ -37,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ash space\cone.less" />
+    <Content Include="ash space\space-simple.less" />
     <None Include="bower.json" />
     <None Include="bundle.json" />
     <Content Include="loader\sample.less" />

@@ -50,6 +50,7 @@
     overflow: hidden;
 
     .scene {
+        z-index:1;
         position: relative;
         width: 100%;
         height: 100%;
@@ -80,10 +81,10 @@
                 height: 100%;
                 -webkit-transform-style: preserve-3d;
                 transform-style: preserve-3d;
-                -moz-transition: 10s ease-in-out;
-                -o-transition: 10s ease-in-out;
-                -webkit-transition: 10s ease-in-out;
-                transition: 10s ease-in-out;
+                -moz-transition: 1s;
+                -o-transition: 1s;
+                -webkit-transition: 1s;
+                transition: 1s;
 
                 .texture {
                     margin: 0;
@@ -97,27 +98,72 @@
                     transform-style: preserve-3d;
                     background-color: #bbb;
                     border-radius: 50%;
-
-                    &.texture-x {
-                    }
-
-                    &.texture-y {
-                        -moz-transform: rotateY( 90deg );
-                        -ms-transform: rotateY( 90deg );
-                        -o-transform: rotateY( 90deg );
-                        -webkit-transform: rotateY( 90deg );
-                        transform: rotateY( 90deg );
-                    }
-
-                    &.texture-z {
-                        -moz-transform: rotateX( 90deg );
-                        -ms-transform: rotateX( 90deg );
-                        -o-transform: rotateX( 90deg );
-                        -webkit-transform: rotateX( 90deg );
-                        transform: rotateX( 90deg );
-                    }
                 }
             }
+        }
+
+        .squ{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            margin-top: -30px;
+            margin-left: -30px;
+            background-color:#ff6a00;
+        }
+    }
+
+    .sensor{
+        z-index:2;
+        position: absolute;
+        width: 33.3%;
+        height: 33.3%;
+        display: block;
+
+        &.topLeft_{
+            top:0;
+            left:0;
+        }
+
+        &.topMid_{
+            top:0;
+            left:33.3%;
+        }
+
+        &.topRight_{
+            top:0;
+            left:66.6%;
+        }
+
+        &.midLeft_{
+            top:33.3%;
+            left:0;
+        }
+
+        &.midMid_{
+            top:33.3%;
+            left:33.3%;
+        }
+
+        &.midRight_{
+            top:33.3%;
+            left:66.6%;
+        }
+
+        &.btmLeft_{
+            top:66.6%;
+            left:0;
+        }
+
+        &.btmMid_{
+            top:66.6%;
+            left:33.3%;
+        }
+
+        &.btmRight_{
+            top:66.6%;
+            left:66.6%;
         }
     }
 }

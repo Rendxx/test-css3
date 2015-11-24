@@ -18,7 +18,8 @@
       "toX": "toX",
       "fade": "fade",
       "dice": "dice",
-      "ash": "ash space"
+      "ash": "ash space",
+      "butterfly": "butterfly"
     }
   },
 
@@ -38,7 +39,8 @@
       "#dice#/sample": [ "#dice#/sample.less" ],
       "#ash#/sample": [ "#ash#/sample.less" ],
       "#ash#/cone": [ "#ash#/cone.less" ],
-      "#ash#/space-simple": [ "#ash#/space-simple.less" ]
+      "#ash#/space-simple": [ "#ash#/space-simple.less" ],
+      "#butterfly#/sample": [ "#butterfly#/sample.less" ]
     },
     "js": {
     }

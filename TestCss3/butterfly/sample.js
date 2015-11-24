@@ -14,6 +14,12 @@
         z: 0
     };
 
+    var containorOffset = {
+        x: (containor[0].getBoundingClientRect().left + containor[0].getBoundingClientRect().right)/2,
+        y: (containor[0].getBoundingClientRect().top+ containor[0].getBoundingClientRect().bottom)/2
+    };
+    var distance = 1000;
+
     // button control
     $('.btn-front').click(function () {
         sceneRotate.z -= 10;
@@ -41,18 +47,43 @@
     });
 
     // mouse control
-    // get mouse position fomr mouse event
+    var _C2S = function (x, y, z) {
+        var r = Math.sqrt(x * x + y * y + z * z);
+        var t = Math.acos(z / r);
+        var p = Math.atan(y / x);
+        return {
+            r: r,
+            y: t * 180 / Math.PI,
+            x: p * 180 / Math.PI
+        };
+    };
+
+    var _S2C = function (r, t, p) {
+        return {
+            x: r * Math.sin(t) * Math.cos(p),
+            y: r * Math.sin(t) * Math.sin(p),
+            z: r * Math.cos(t)
+        };
+    };
+
+
+    // get mouse position from mouse event
     var _getMousePosition = function (e) {
         var pos = {};
         pos["x"] = e.pageX == undefined ? e.originalEvent.touches[0].pageX : e.pageX;
         pos["y"] = e.pageY == undefined ? e.originalEvent.touches[0].pageY : e.pageY;
+
+        pos["x"] -= containorOffset.x;
+        pos["y"] -= containorOffset.y;
+
         return pos;
     };
 
     var _lastPos = null;
     var startDrag = function (e) {
         e.preventDefault();
-        _lastPos = _getMousePosition(e);
+        var mousePos = _getMousePosition(e);
+        _lastPos = _C2S(mousePos.x, mousePos.y, distance);
 
         containor.bind("mousemove", onDrag);
         containor.bind("mouseup", stopDrag);
@@ -61,9 +92,13 @@
     var onDrag = function (e) {
         e.preventDefault();
         var mousePos = _getMousePosition(e);
-        sceneRotate.x -= mousePos.y - _lastPos.y;
-        sceneRotate.y += mousePos.x - _lastPos.x;
-        _lastPos = mousePos;
+        var p = _C2S(mousePos.x, mousePos.y, distance);
+
+        console.log(p.x, p.y);
+        sceneRotate.x -= p.x - _lastPos.x;
+        sceneRotate.y -= p.y - _lastPos.y;
+
+        _lastPos = p;
         _render();
     };
     var stopDrag = function (e) {
@@ -71,9 +106,11 @@
         containor.unbind("mouseup", stopDrag);
 
         var mousePos = _getMousePosition(e);
-        var mousePos = _getMousePosition(e);
-        sceneRotate.x -= mousePos.y - _lastPos.y;
-        sceneRotate.y += mousePos.x - _lastPos.x;
+        var p = _C2S(mousePos.x, mousePos.y, distance);
+
+        sceneRotate.x -= p.x - _lastPos.x;
+        sceneRotate.y -= p.y - _lastPos.y;
+
         _lastPos = mousePos;
         _render();
     };

@@ -53,7 +53,7 @@
         var p = Math.atan(y / x);
         return {
             r: r,
-            x: 90-t * 180 / Math.PI,
+            x: t * 180 / Math.PI,
             y: p * 180 / Math.PI
         };
     };
@@ -95,7 +95,7 @@
         var p = _C2S(distance, mousePos.x, -mousePos.y);
 
         console.log(mousePos.x, -mousePos.y,p.x, p.y);
-        sceneRotate.x += p.x - _lastPos.x;
+        sceneRotate.x -= p.x - _lastPos.x;
         sceneRotate.y += p.y - _lastPos.y;
 
         _lastPos = p;

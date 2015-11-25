@@ -22,6 +22,8 @@
     <Content Include="ash space\sample.html" />
     <Content Include="ash space\space-simple.js" />
     <Content Include="ash space\tran_texture.png" />
+    <Content Include="3D Viewer\sample.html" />
+    <Content Include="3D Viewer\sample.js" />
     <Content Include="butterfly\sample.html" />
     <Content Include="butterfly\sample.js" />
     <Content Include="dice\sample.html" />
@@ -50,6 +52,7 @@
     <Content Include="dice\sample.less" />
     <Content Include="ash space\sample.less" />
     <Content Include="butterfly\sample.less" />
+    <Content Include="3D Viewer\sample.less" />
     <None Include="slider\sample.less" />
     <None Include="package.json" />
   </ItemGroup>

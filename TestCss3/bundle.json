@@ -19,7 +19,8 @@
       "fade": "fade",
       "dice": "dice",
       "ash": "ash space",
-      "butterfly": "butterfly"
+      "butterfly": "butterfly",
+      "3DViewer": "3D Viewer"
     }
   },
 
@@ -40,7 +41,8 @@
       "#ash#/sample": [ "#ash#/sample.less" ],
       "#ash#/cone": [ "#ash#/cone.less" ],
       "#ash#/space-simple": [ "#ash#/space-simple.less" ],
-      "#butterfly#/sample": [ "#butterfly#/sample.less" ]
+      "#butterfly#/sample": [ "#butterfly#/sample.less" ],
+      "#3DViewer#/sample": [ "#3DViewer#/sample.less" ]
     },
     "js": {
     }

@@ -83,7 +83,7 @@
     var startDrag = function (e) {
         e.preventDefault();
         var mousePos = _getMousePosition(e);
-        _lastPos = _C2S(mousePos.x, distance, -mousePos.y);
+        _lastPos = _C2S(distance, mousePos.x, -mousePos.y);
 
         containor.bind("mousemove", onDrag);
         containor.bind("mouseup", stopDrag);
@@ -92,11 +92,11 @@
     var onDrag = function (e) {
         e.preventDefault();
         var mousePos = _getMousePosition(e);
-        var p = _C2S(mousePos.x, distance, -mousePos.y);
+        var p = _C2S(distance, mousePos.x, -mousePos.y);
 
-        console.log(p.x, p.y);
+        console.log(mousePos.x, -mousePos.y,p.x, p.y);
         sceneRotate.x += p.x - _lastPos.x;
-        sceneRotate.y -= p.y - _lastPos.y;
+        sceneRotate.y += p.y - _lastPos.y;
 
         _lastPos = p;
         _render();

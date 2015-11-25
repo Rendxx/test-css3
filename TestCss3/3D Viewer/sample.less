@@ -78,6 +78,8 @@
             -o-transition: 1s ease-in-out;
             -webkit-transition: 1s ease-in-out;
             transition: 1s ease-in-out;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
 
             .face {
                 border: 2px solid #000;
@@ -97,7 +99,7 @@
                     -o-transform: rotateY(0deg) translateZ(100px);
                     -webkit-transform: rotateY(0deg) translateZ(100px);
                     transform: rotateY(0deg) translateZ(100px);
-                    background-color: rgba(255, 0, 0, 0.50);
+                    background-color: rgba(255, 0, 0, 1);
                 }
 
                 &.face-back {
@@ -106,7 +108,7 @@
                     -o-transform: rotateX( 180deg ) translateZ(100px);
                     -webkit-transform: rotateX( 180deg ) translateZ(100px);
                     transform: rotateX( 180deg ) translateZ(100px);
-                    background-color: rgba(255, 106, 0, 0.50);
+                    background-color: rgba(255, 106, 0, 1);
                 }
 
                 &.face-right {
@@ -115,7 +117,7 @@
                     -o-transform: rotateY( 90deg ) translateZ(100px);
                     -webkit-transform: rotateY( 90deg ) translateZ(100px);
                     transform: rotateY( 90deg ) translateZ(100px);
-                    background-color: rgba(255, 242, 0, 0.50);
+                    background-color: rgba(255, 242, 0, 1);
                 }
 
                 &.face-left {
@@ -124,7 +126,7 @@
                     -o-transform: rotateY( -90deg ) translateZ(100px);
                     -webkit-transform: rotateY( -90deg ) translateZ(100px);
                     transform: rotateY( -90deg ) translateZ(100px);
-                    background-color: rgba(26, 255, 0, 0.50);
+                    background-color: rgba(26, 255, 0, 1);
                 }
 
                 &.face-top {
@@ -133,7 +135,7 @@
                     -o-transform: rotateX( 90deg ) translateZ(100px);
                     -webkit-transform: rotateX( 90deg ) translateZ(100px);
                     transform: rotateX( 90deg ) translateZ(100px);
-                    background-color: rgba(0, 138, 255, 0.50);
+                    background-color: rgba(0, 138, 255, 1);
                 }
 
                 &.face-bottom {
@@ -142,7 +144,7 @@
                     -o-transform: rotateX( -90deg ) translateZ(100px);
                     -webkit-transform: rotateX( -90deg ) translateZ(100px);
                     transform: rotateX( -90deg ) translateZ(100px);
-                    background-color: rgba(213, 0, 255, 0.50);
+                    background-color: rgba(213, 0, 255, 1);
                 }
             }
 

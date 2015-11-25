@@ -18,7 +18,7 @@
         x: (containor[0].getBoundingClientRect().left + containor[0].getBoundingClientRect().right)/2,
         y: (containor[0].getBoundingClientRect().top+ containor[0].getBoundingClientRect().bottom)/2
     };
-    var distance = 1000;
+    var distance = 100;
 
     // button control
     $('.btn-front').click(function () {
@@ -53,8 +53,8 @@
         var p = Math.atan(y / x);
         return {
             r: r,
-            y: t * 180 / Math.PI,
-            x: p * 180 / Math.PI
+            x: 90-t * 180 / Math.PI,
+            y: p * 180 / Math.PI
         };
     };
 
@@ -83,7 +83,7 @@
     var startDrag = function (e) {
         e.preventDefault();
         var mousePos = _getMousePosition(e);
-        _lastPos = _C2S(mousePos.x, mousePos.y, distance);
+        _lastPos = _C2S(mousePos.x, distance, -mousePos.y);
 
         containor.bind("mousemove", onDrag);
         containor.bind("mouseup", stopDrag);
@@ -92,10 +92,10 @@
     var onDrag = function (e) {
         e.preventDefault();
         var mousePos = _getMousePosition(e);
-        var p = _C2S(mousePos.x, mousePos.y, distance);
+        var p = _C2S(mousePos.x, distance, -mousePos.y);
 
         console.log(p.x, p.y);
-        sceneRotate.x -= p.x - _lastPos.x;
+        sceneRotate.x += p.x - _lastPos.x;
         sceneRotate.y -= p.y - _lastPos.y;
 
         _lastPos = p;
@@ -105,6 +105,7 @@
         containor.unbind("mousemove", onDrag);
         containor.unbind("mouseup", stopDrag);
 
+        return;
         var mousePos = _getMousePosition(e);
         var p = _C2S(mousePos.x, mousePos.y, distance);
 

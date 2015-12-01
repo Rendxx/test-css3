@@ -157,11 +157,11 @@
         var y = point[1];
         var z = point[2];
 
-        var sin_x = _sincos.x[0];
+        var sin_x = -_sincos.x[0];
         var cos_x = _sincos.x[1];
-        var sin_y = _sincos.y[0];
+        var sin_y = -_sincos.y[0];
         var cos_y = _sincos.y[1];
-        var sin_z = _sincos.z[0];
+        var sin_z = -_sincos.z[0];
         var cos_z = _sincos.z[1];
 
         var t;
@@ -198,21 +198,22 @@
     var startDrag = function (e) {
         e.preventDefault();
         var mousePos = _getMousePosition(e);
-        _lastPos = _C2S(distance, mousePos.x, -mousePos.y);
+        //_lastPos = _C2S(distance, mousePos.x, -mousePos.y);
         var point = _screen2Coor(mousePos.x, mousePos.y);
-        var newPoint = _rotate3d(point);
+        _lastPos = _rotate3d(point);
 
         //console.log('coor: ' + point);
         //console.log('tran: ' + newPoint);
-        //containor.bind("mousemove", onDrag);
-        //containor.bind("mouseup", stopDrag);
+        containor.bind("mousemove", onDrag);
+        containor.bind("mouseup", stopDrag);
     };
 
     var onDrag = function (e) {
         e.preventDefault();
         var mousePos = _getMousePosition(e);
-        var p = _C2S(distance, mousePos.x, -mousePos.y);
-
+        //var p = _C2S(distance, mousePos.x, -mousePos.y);
+        var point = _screen2Coor(mousePos.x, mousePos.y);
+        var p = _rotate3d(point);
         console.log(mousePos.x, -mousePos.y,p.x, p.y);
         sceneRotate.x -= p.x - _lastPos.x;
         sceneRotate.y += p.y - _lastPos.y;

@@ -15,8 +15,8 @@
     };
 
     var containorOffset = {
-        x: (containor[0].getBoundingClientRect().left + containor[0].getBoundingClientRect().right)/2,
-        y: (containor[0].getBoundingClientRect().top+ containor[0].getBoundingClientRect().bottom)/2
+        x: (containor[0].getBoundingClientRect().left + containor[0].getBoundingClientRect().right) / 2,
+        y: (containor[0].getBoundingClientRect().top + containor[0].getBoundingClientRect().bottom) / 2
     };
     var distance = 1000;    // distance from the obj to screen
     var radius = 250;       // control radius
@@ -28,6 +28,7 @@
     };
 
     // button control
+    /* 
     $('.btn-z-1').click(function () {
         sceneRotate.z += 10;
         _sincos.z[0] = Math.sin(sceneRotate.z / 180 * Math.PI);
@@ -94,6 +95,58 @@
 
         _render();
     });
+    */
+
+    var _matrix = [1, 0, 0, 0, 1, 0, 0, 0, 1];
+    // button control
+    $('.btn-z-1').click(function () {
+        var sin = Math.sin(10 / 180 * Math.PI);
+        var cos = Math.cos(10 / 180 * Math.PI);
+
+        var m = [cos, -sin, 0, sin, cos, 0, 0, 0, 1];
+        _matrix = _martixMulti(_matrix, m);
+        _render2();
+    });
+    $('.btn-z-2').click(function () {
+        var sin = Math.sin(-10 / 180 * Math.PI);
+        var cos = Math.cos(-10 / 180 * Math.PI);
+
+        var m = [cos, -sin, 0, sin, cos, 0, 0, 0, 1];
+        _matrix = _martixMulti(_matrix, m);
+        _render2();
+    });
+    $('.btn-y-1').click(function () {
+        var sin = Math.sin(10 / 180 * Math.PI);
+        var cos = Math.cos(10 / 180 * Math.PI);
+
+        var m = [cos, 0, sin, 0, 1, 0, -sin, 0, cos];
+        _matrix = _martixMulti(_matrix, m);
+        _render2();
+    });
+    $('.btn-y-2').click(function () {
+        var sin = Math.sin(-10 / 180 * Math.PI);
+        var cos = Math.cos(-10 / 180 * Math.PI);
+
+        var m = [cos, 0, sin, 0, 1, 0, -sin, 0, cos];
+        _matrix = _martixMulti(_matrix, m);
+        _render2();
+    });
+    $('.btn-x-1').click(function () {
+        var sin = Math.sin(10 / 180 * Math.PI);
+        var cos = Math.cos(10 / 180 * Math.PI);
+
+        var m = [1, 0, 0, 0, cos, -sin, 0, sin, cos];
+        _matrix = _martixMulti(_matrix, m);
+        _render2();
+    });
+    $('.btn-x-2').click(function () {
+        var sin = Math.sin(-10 / 180 * Math.PI);
+        var cos = Math.cos(-10 / 180 * Math.PI);
+
+        var m = [1, 0, 0, 0, cos, -sin, 0, sin, cos];
+        _matrix = _martixMulti(_matrix, m);
+        _render2();
+    });
 
     // mouse control
     var _C2S = function (x, y, z) {
@@ -142,9 +195,9 @@
          *   /
          *  z
          */
-         
+
         var z = 0;
-        var t =_radius_squ-(x * x + y * y);
+        var t = _radius_squ - (x * x + y * y);
         if (t > 0) z = Math.sqrt(t);
 
         return [x, y, z];
@@ -184,6 +237,24 @@
         return [x, y, z];
     };
 
+    // multiple 2 matrixes(3*3)
+    // A = [a00, a01, ... a0n, a10, ... a1n . a20 .. am0 , ... amn]
+    var _martixMulti = function (A, B) {
+        var rst = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+        var n = 0;
+        for (var i = 0; i < 3; i++) {
+            for (var j = 0; j < 3; j++) {
+                n = i * 3 + j;
+                rst[n] = 0;
+                for (var k = 0; k < 3; k++) {
+                    rst[n] += A[i * 3 + k] * B[k * 3 + j];
+                }
+            }
+        }
+
+        return rst;
+    };
+    // window.mmm = _martixMulti;
 
     // get mouse position from mouse event
     var _getMousePosition = function (e) {
@@ -214,7 +285,7 @@
         //var p = _C2S(distance, mousePos.x, -mousePos.y);
         var point = _screen2Coor(mousePos.x, mousePos.y);
         var p = _rotate3d(point);
-        console.log(mousePos.x, -mousePos.y,p.x, p.y);
+        console.log(mousePos.x, -mousePos.y, p.x, p.y);
         sceneRotate.x -= p.x - _lastPos.x;
         sceneRotate.y += p.y - _lastPos.y;
 
@@ -248,6 +319,11 @@
     var _render = function () {
         scene.css({
             'transform': 'rotateX(' + sceneRotate.x + 'deg) rotateY(' + sceneRotate.y + 'deg) rotateZ(' + sceneRotate.z + 'deg) translate3D(' + sceneTranslate.x + 'px, ' + sceneTranslate.y + 'px, ' + sceneTranslate.z + 'px)'
+        });
+    };
+    var _render2 = function () {
+        scene.css({
+            'transform': 'matrix3d(' + _matrix[0] + ',' + _matrix[1] + ',' + _matrix[2] + ', 0,' + _matrix[3] + ',' + _matrix[4] + ',' + _matrix[5] + ', 0,' + _matrix[6] + ',' + _matrix[7] + ',' + _matrix[8] + ', 0,' + '0,0,0,1)'
         });
     };
 });

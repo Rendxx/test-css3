@@ -19,83 +19,13 @@
         y: (containor[0].getBoundingClientRect().top + containor[0].getBoundingClientRect().bottom) / 2
     };
     var distance = 1000;    // distance from the obj to screen
-    var radius = 250;       // control radius
+    var radius = 200;       // control radius
     var _radius_squ = radius * radius;
     var _sincos = {
         x: [0, 1],
         y: [0, 1],
         z: [0, 1]
     };
-
-    // button control
-    /* 
-    $('.btn-z-1').click(function () {
-        sceneRotate.z += 10;
-        _sincos.z[0] = Math.sin(sceneRotate.z / 180 * Math.PI);
-        _sincos.z[1] = Math.cos(sceneRotate.z / 180 * Math.PI);
-        console.log(_rotate3d([0, 0, radius]));
-        console.log('x: ' + _sincos.x);
-        console.log('y: ' + _sincos.y);
-        console.log('z: ' + _sincos.z);
-
-        _render();
-    });
-    $('.btn-z-2').click(function () {
-        sceneRotate.z -= 10;
-        _sincos.z[0] = Math.sin(sceneRotate.z / 180 * Math.PI);
-        _sincos.z[1] = Math.cos(sceneRotate.z / 180 * Math.PI);
-        console.log(_rotate3d([0, 0, radius]));
-        console.log('x: ' + _sincos.x);
-        console.log('y: ' + _sincos.y);
-        console.log('z: ' + _sincos.z);
-
-        _render();
-    });
-    $('.btn-y-1').click(function () {
-        sceneRotate.y += 10;
-        _sincos.y[0] = Math.sin(sceneRotate.y / 180 * Math.PI);
-        _sincos.y[1] = Math.cos(sceneRotate.y / 180 * Math.PI);
-        console.log(_rotate3d([0, 0, radius]));
-        console.log('x: ' + _sincos.x);
-        console.log('y: ' + _sincos.y);
-        console.log('z: ' + _sincos.z);
-
-        _render();
-    });
-    $('.btn-y-2').click(function () {
-        sceneRotate.y -= 10;
-        _sincos.y[0] = Math.sin(sceneRotate.y / 180 * Math.PI);
-        _sincos.y[1] = Math.cos(sceneRotate.y / 180 * Math.PI);
-        console.log(_rotate3d([0, 0, radius]));
-        console.log('x: ' + _sincos.x);
-        console.log('y: ' + _sincos.y);
-        console.log('z: ' + _sincos.z);
-
-        _render();
-    });
-    $('.btn-x-1').click(function () {
-        sceneRotate.x += 10;
-        _sincos.x[0] = Math.sin(sceneRotate.x / 180 * Math.PI);
-        _sincos.x[1] = Math.cos(sceneRotate.x / 180 * Math.PI);
-        console.log(_rotate3d([0, 0, radius]));
-        console.log('x: ' + _sincos.x);
-        console.log('y: ' + _sincos.y);
-        console.log('z: ' + _sincos.z);
-
-        _render();
-    });
-    $('.btn-x-2').click(function () {
-        sceneRotate.x -= 10;
-        _sincos.x[0] = Math.sin(sceneRotate.x / 180 * Math.PI);
-        _sincos.x[1] = Math.cos(sceneRotate.x / 180 * Math.PI);
-        console.log(_rotate3d([0, 0, radius]));
-        console.log('x: ' + _sincos.x);
-        console.log('y: ' + _sincos.y);
-        console.log('z: ' + _sincos.z);
-
-        _render();
-    });
-    */
 
     var _matrix = [1, 0, 0, 0, 1, 0, 0, 0, 1];
     // button control
@@ -148,23 +78,12 @@
         _render2();
     });
 
-    // mouse control
-    var _C2S = function (x, y, z) {
+    // get radius from 3d coordinate
+    var _getRadius = function (x, y, z) {
         var r = Math.sqrt(x * x + y * y + z * z);
-        var t = Math.acos(z / r);
-        var p = Math.atan(y / x);
         return {
-            r: r,
-            x: t * 180 / Math.PI,
-            y: p * 180 / Math.PI
-        };
-    };
-
-    var _S2C = function (r, t, p) {
-        return {
-            x: r * Math.sin(t) * Math.cos(p),
-            y: r * Math.sin(t) * Math.sin(p),
-            z: r * Math.cos(t)
+            x: Math.asin(y / r),
+            y: -Math.asin(x / r)
         };
     };
 
@@ -177,10 +96,10 @@
          */
 
         /* 1. 2D coordinate: normal coordinate
-         *   ˄ y
          *   |
          * --+----> x
          *   |
+         *   ˅ y
          */
 
         x = x - containorOffset.x;
@@ -189,11 +108,11 @@
         /* 2. 3D coordinate: normal coordinate
          * Assume the mouse touchs a ball with radius (defined before)
          * If the mouse click not within the ball area, make z = 0
-         *    ˄ y
-         *    |
-         *    *----> x
-         *   /
          *  z
+         *   \
+         *    *----> x
+         *    |
+         *    ˅ y
          */
 
         var z = 0;
@@ -265,16 +184,16 @@
         return pos;
     };
 
-    var _lastPos = null;
+    var _last = null;
     var startDrag = function (e) {
         e.preventDefault();
         var mousePos = _getMousePosition(e);
-        //_lastPos = _C2S(distance, mousePos.x, -mousePos.y);
+        //_last = _C2S(distance, mousePos.x, -mousePos.y);
         var point = _screen2Coor(mousePos.x, mousePos.y);
-        _lastPos = _rotate3d(point);
+        _last = _getRadius(point[0], point[1], point[2]);
 
         //console.log('coor: ' + point);
-        //console.log('tran: ' + newPoint);
+        //console.log('tran: ' + _last);
         containor.bind("mousemove", onDrag);
         containor.bind("mouseup", stopDrag);
     };
@@ -284,26 +203,45 @@
         var mousePos = _getMousePosition(e);
         //var p = _C2S(distance, mousePos.x, -mousePos.y);
         var point = _screen2Coor(mousePos.x, mousePos.y);
-        var p = _rotate3d(point);
-        console.log(mousePos.x, -mousePos.y, p.x, p.y);
-        sceneRotate.x -= p.x - _lastPos.x;
-        sceneRotate.y += p.y - _lastPos.y;
+        var p = _getRadius(point[0], point[1], point[2]);
 
-        _lastPos = p;
-        _render();
+        console.log('[point] ' + point.join('  '));
+        console.log('[radius-x] ' + p.x);
+        console.log('[radius-y] ' + p.y);
+
+
+        var r, sin, cos, m;
+        r = p.x - _last.x;
+        sin = Math.sin(r);
+        cos = Math.cos(r);
+        m = [1, 0, 0, 0, cos, -sin, 0, sin, cos];
+        _matrix = _martixMulti(_matrix, m);
+        console.log('dif-x: ' + r);
+
+        r = p.y- _last.y;
+        sin = Math.sin(r);
+        cos = Math.cos(r);
+        m = [cos, 0, sin, 0, 1, 0, -sin, 0, cos];
+        _matrix = _martixMulti(_matrix, m);
+
+        console.log('dif-y: ' + r);
+        console.log(' ');
+
+        _last = p;
+        _render2();
     };
     var stopDrag = function (e) {
-        //containor.unbind("mousemove", onDrag);
-        //containor.unbind("mouseup", stopDrag);
+        containor.unbind("mousemove", onDrag);
+        containor.unbind("mouseup", stopDrag);
 
         return;
         var mousePos = _getMousePosition(e);
         var p = _C2S(mousePos.x, mousePos.y, distance);
 
-        sceneRotate.x -= p.x - _lastPos.x;
-        sceneRotate.y -= p.y - _lastPos.y;
+        sceneRotate.x -= p.x - _last.x;
+        sceneRotate.y -= p.y - _last.y;
 
-        _lastPos = mousePos;
+        _last = mousePos;
         _render();
     };
 

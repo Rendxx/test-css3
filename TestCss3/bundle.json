@@ -20,7 +20,8 @@
       "dice": "dice",
       "ash": "ash space",
       "butterfly": "butterfly",
-      "3DViewer": "3D Viewer"
+      "3DViewer": "3D Viewer",
+      "canvas": "Canvas"
     }
   },
 
@@ -42,7 +43,8 @@
       "#ash#/cone": [ "#ash#/cone.less" ],
       "#ash#/space-simple": [ "#ash#/space-simple.less" ],
       "#butterfly#/sample": [ "#butterfly#/sample.less" ],
-      "#3DViewer#/sample": [ "#3DViewer#/sample.less" ]
+      "#3DViewer#/sample": [ "#3DViewer#/sample.less" ],
+      "#canvas#/sample": [ "#canvas#/sample.less" ]
     },
     "js": {
     }

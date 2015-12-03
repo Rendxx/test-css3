@@ -14,6 +14,8 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Canvas\sample.html" />
+    <Content Include="Canvas\sample.js" />
     <Content Include="ash space\ash_texture.png" />
     <Content Include="ash space\cone.html" />
     <Content Include="ash space\cone.js" />
@@ -44,6 +46,7 @@
   <ItemGroup>
     <Content Include="ash space\cone.less" />
     <Content Include="ash space\space-simple.less" />
+    <Content Include="Canvas\sample.less" />
     <None Include="bower.json" />
     <None Include="bundle.json" />
     <Content Include="loader\sample.less" />

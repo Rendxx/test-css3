@@ -2,70 +2,128 @@
     // data
     var containor = $('.containor')
     var scene = $('.scene')
-    var butterfly = $('.butterfly');
-    var sceneRotate = {
-        x: 0,
-        y: 0,
-        z: 0
-    };
-    var sceneTranslate = {
-        x: 0,
-        y: 0,
-        z: 0
-    };
 
     var containorOffset = {
-        x: (containor[0].getBoundingClientRect().left + containor[0].getBoundingClientRect().right)/2,
-        y: (containor[0].getBoundingClientRect().top+ containor[0].getBoundingClientRect().bottom)/2
+        x: (containor[0].getBoundingClientRect().left + containor[0].getBoundingClientRect().right) / 2,
+        y: (containor[0].getBoundingClientRect().top + containor[0].getBoundingClientRect().bottom) / 2
     };
-    var distance = 100;
+    var distance = 1000;    // distance from the obj to screen
+    var radius = 200;       // control radius
+    var _radius_squ = radius * radius;
 
+    var _matrix = [1, 0, 0, 0, 1, 0, 0, 0, 1];
     // button control
-    $('.btn-front').click(function () {
-        sceneRotate.z -= 10;
-        _render();
+    $('.btn-z-1').click(function () {
+        var sin = Math.sin(10 / 180 * Math.PI);
+        var cos = Math.cos(10 / 180 * Math.PI);
+
+        var m = [cos, -sin, 0, sin, cos, 0, 0, 0, 1];
+        _matrix = _martixMulti(_matrix, m);
+        _render2();
     });
-    $('.btn-back').click(function () {
-        sceneRotate.z += 10;
-        _render();
+    $('.btn-z-2').click(function () {
+        var sin = Math.sin(-10 / 180 * Math.PI);
+        var cos = Math.cos(-10 / 180 * Math.PI);
+
+        var m = [cos, -sin, 0, sin, cos, 0, 0, 0, 1];
+        _matrix = _martixMulti(_matrix, m);
+        _render2();
     });
-    $('.btn-right').click(function () {
-        sceneRotate.y += 10;
-        _render();
+    $('.btn-y-1').click(function () {
+        var sin = Math.sin(10 / 180 * Math.PI);
+        var cos = Math.cos(10 / 180 * Math.PI);
+
+        var m = [cos, 0, sin, 0, 1, 0, -sin, 0, cos];
+        _matrix = _martixMulti(_matrix, m);
+        _render2();
     });
-    $('.btn-left').click(function () {
-        sceneRotate.y -= 10;
-        _render();
+    $('.btn-y-2').click(function () {
+        var sin = Math.sin(-10 / 180 * Math.PI);
+        var cos = Math.cos(-10 / 180 * Math.PI);
+
+        var m = [cos, 0, sin, 0, 1, 0, -sin, 0, cos];
+        _matrix = _martixMulti(_matrix, m);
+        _render2();
     });
-    $('.btn-top').click(function () {
-        sceneRotate.x += 10;
-        _render();
+    $('.btn-x-1').click(function () {
+        var sin = Math.sin(10 / 180 * Math.PI);
+        var cos = Math.cos(10 / 180 * Math.PI);
+
+        var m = [1, 0, 0, 0, cos, -sin, 0, sin, cos];
+        _matrix = _martixMulti(_matrix, m);
+        _render2();
     });
-    $('.btn-bottom').click(function () {
-        sceneRotate.x -= 10;
-        _render();
+    $('.btn-x-2').click(function () {
+        var sin = Math.sin(-10 / 180 * Math.PI);
+        var cos = Math.cos(-10 / 180 * Math.PI);
+
+        var m = [1, 0, 0, 0, cos, -sin, 0, sin, cos];
+        _matrix = _martixMulti(_matrix, m);
+        _render2();
     });
 
-    // mouse control
-    var _C2S = function (x, y, z) {
+    // get radius from 3d coordinate
+    var _getRadius = function (x, y, z) {
         var r = Math.sqrt(x * x + y * y + z * z);
-        var t = Math.acos(z / r);
-        var p = Math.atan(y / x);
         return {
-            r: r,
-            x: 90-t * 180 / Math.PI,
-            y: p * 180 / Math.PI
+            x: Math.asin(y / r),
+            y: -Math.asin(x / r)
         };
     };
 
-    var _S2C = function (r, t, p) {
-        return {
-            x: r * Math.sin(t) * Math.cos(p),
-            y: r * Math.sin(t) * Math.sin(p),
-            z: r * Math.cos(t)
-        };
+    // get {x,y,z} from related x, y in screen coordinate 
+    var _screen2Coor = function (x, y) {
+        /* 0. arguement coordinate: screen coordinate
+         *  +---> x
+         *  |
+         *  ˅ y
+         */
+
+        /* 1. 2D coordinate: normal coordinate
+         *   |
+         * --+----> x
+         *   |
+         *   ˅ y
+         */
+
+        x = x - containorOffset.x;
+        y = y - containorOffset.y;
+
+        /* 2. 3D coordinate: normal coordinate
+         * Assume the mouse touchs a ball with radius (defined before)
+         * If the mouse click not within the ball area, make z = 0
+         *  z
+         *   \
+         *    *----> x
+         *    |
+         *    ˅ y
+         */
+
+        var z = 0;
+        var t = _radius_squ - (x * x + y * y);
+        if (t > 0) z = Math.sqrt(t);
+
+        return [x, y, z];
     };
 
+    // multiple 2 matrixes(3*3)
+    // A = [a00, a01, ... a0n, a10, ... a1n . a20 .. am0 , ... amn]
+    var _martixMulti = function (A, B) {
+        var rst = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+        var n = 0;
+        for (var i = 0; i < 3; i++) {
+            for (var j = 0; j < 3; j++) {
+                n = i * 3 + j;
+                rst[n] = 0;
+                for (var k = 0; k < 3; k++) {
+                    rst[n] += A[i * 3 + k] * B[k * 3 + j];
+                }
+            }
+        }
+
+        return rst;
+    };
+    // window.mmm = _martixMulti;
 
     // get mouse position from mouse event
     var _getMousePosition = function (e) {
@@ -73,17 +131,15 @@
         pos["x"] = e.pageX == undefined ? e.originalEvent.touches[0].pageX : e.pageX;
         pos["y"] = e.pageY == undefined ? e.originalEvent.touches[0].pageY : e.pageY;
 
-        pos["x"] -= containorOffset.x;
-        pos["y"] -= containorOffset.y;
-
         return pos;
     };
 
-    var _lastPos = null;
+    var _last = null;
     var startDrag = function (e) {
         e.preventDefault();
         var mousePos = _getMousePosition(e);
-        _lastPos = _C2S(mousePos.x, distance, -mousePos.y);
+        var point = _screen2Coor(mousePos.x, mousePos.y);
+        _last = _getRadius(point[0], point[1], point[2]);
 
         containor.bind("mousemove", onDrag);
         containor.bind("mouseup", stopDrag);
@@ -92,42 +148,46 @@
     var onDrag = function (e) {
         e.preventDefault();
         var mousePos = _getMousePosition(e);
-        var p = _C2S(mousePos.x, distance, -mousePos.y);
+        var point = _screen2Coor(mousePos.x, mousePos.y);
+        var p = _getRadius(point[0], point[1], point[2]);
 
-        console.log(p.x, p.y);
-        sceneRotate.x += p.x - _lastPos.x;
-        sceneRotate.y -= p.y - _lastPos.y;
+        //console.log('[point] ' + point.join('  '));
+        //console.log('[radius-x] ' + p.x);
+        //console.log('[radius-y] ' + p.y);
 
-        _lastPos = p;
-        _render();
+
+        var r, sin, cos, m;
+        r = p.x - _last.x;
+        sin = Math.sin(r);
+        cos = Math.cos(r);
+        m = [1, 0, 0, 0, cos, -sin, 0, sin, cos];
+        _matrix = _martixMulti(_matrix, m);
+        //console.log('dif-x: ' + r);
+
+        r = p.y - _last.y;
+        sin = Math.sin(r);
+        cos = Math.cos(r);
+        m = [cos, 0, sin, 0, 1, 0, -sin, 0, cos];
+        _matrix = _martixMulti(_matrix, m);
+
+        //console.log('dif-y: ' + r);
+        //console.log(' ');
+
+        _last = p;
+        _render2();
     };
     var stopDrag = function (e) {
         containor.unbind("mousemove", onDrag);
         containor.unbind("mouseup", stopDrag);
-
-        return;
-        var mousePos = _getMousePosition(e);
-        var p = _C2S(mousePos.x, mousePos.y, distance);
-
-        sceneRotate.x -= p.x - _lastPos.x;
-        sceneRotate.y -= p.y - _lastPos.y;
-
-        _lastPos = mousePos;
-        _render();
     };
 
     containor.bind("mousedown", startDrag);
 
 
     // function
-    var _renderScene = function () {
+    var _render2 = function () {
         scene.css({
-            'transform': 'rotateX(' + sceneRotate.x + 'deg) rotateY(' + sceneRotate.y + 'deg) rotateZ(' + sceneRotate.z + 'deg) translate3D(' + sceneTranslate.x + 'px, ' + sceneTranslate.y + 'px, ' + sceneTranslate.z + 'px)'
-        });
-    };
-    var _render = function () {
-        scene.css({
-            'transform': 'rotateX(' + sceneRotate.x + 'deg) rotateY(' + sceneRotate.y + 'deg) rotateZ(' + sceneRotate.z + 'deg) translate3D(' + sceneTranslate.x + 'px, ' + sceneTranslate.y + 'px, ' + sceneTranslate.z + 'px)'
+            'transform': 'matrix3d(' + _matrix[0] + ',' + _matrix[1] + ',' + _matrix[2] + ', 0,' + _matrix[3] + ',' + _matrix[4] + ',' + _matrix[5] + ', 0,' + _matrix[6] + ',' + _matrix[7] + ',' + _matrix[8] + ', 0,' + '0,0,0,1)'
         });
     };
 });

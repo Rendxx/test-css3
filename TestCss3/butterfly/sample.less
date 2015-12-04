@@ -199,18 +199,17 @@
                         -moz-backface-visibility: hidden;
                         -webkit-backface-visibility: hidden;
                         backface-visibility: hidden;
+                        background-image: url(wind.png);
 
                         &.up_ {
-                            background-color: #ff6a00;
                         }
 
                         &.down_ {
-                            background-color: #006bff;
-                            -moz-transform: rotateX( 180deg );
-                            -ms-transform: rotateX( 180deg );
-                            -o-transform: rotateX( 180deg );
-                            -webkit-transform: rotateX( 180deg );
-                            transform: rotateX( 180deg );
+                            -moz-transform: rotateY( 180deg ) scaleX(-1);
+                            -ms-transform: rotateY( 180deg ) scaleX(-1);
+                            -o-transform: rotateY( 180deg ) scaleX(-1);
+                            -webkit-transform: rotateY( 180deg ) scaleX(-1);
+                            transform: rotateY( 180deg ) scaleX(-1);
                         }
                     }
                 }
@@ -218,6 +217,11 @@
                 &.right_ {
                     left: 50%;
                     margin-left: @offset;
+                    -moz-transform: scaleX(-1);
+                    -ms-transform: scaleX(-1);
+                    -o-transform: scaleX(-1);
+                    -webkit-transform: scaleX(-1);
+                    transform: scaleX(-1);
 
                     .side_ {
                         position: absolute;
@@ -233,18 +237,17 @@
                         -moz-backface-visibility: hidden;
                         -webkit-backface-visibility: hidden;
                         backface-visibility: hidden;
+                        background-image: url(wind.png);
 
                         &.up_ {
-                            background-color: #ff6a00;
                         }
 
                         &.down_ {
-                            background-color: #006bff;
-                            -moz-transform: rotateX( 180deg );
-                            -ms-transform: rotateX( 180deg );
-                            -o-transform: rotateX( 180deg );
-                            -webkit-transform: rotateX( 180deg );
-                            transform: rotateX( 180deg );
+                            -moz-transform: rotateY( 180deg ) scaleX(-1);
+                            -ms-transform: rotateY( 180deg ) scaleX(-1);
+                            -o-transform: rotateY( 180deg ) scaleX(-1);
+                            -webkit-transform: rotateY( 180deg ) scaleX(-1);
+                            transform: rotateY( 180deg ) scaleX(-1);
                         }
                     }
                 }

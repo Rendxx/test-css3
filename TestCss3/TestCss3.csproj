@@ -14,6 +14,7 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="butterfly\wind.png" />
     <Content Include="Canvas\sample.html" />
     <Content Include="Canvas\sample.js" />
     <Content Include="ash space\ash_texture.png" />

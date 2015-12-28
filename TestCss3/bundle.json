@@ -21,7 +21,8 @@
       "ash": "ash space",
       "butterfly": "butterfly",
       "3DViewer": "3D Viewer",
-      "canvas": "Canvas"
+      "canvas": "Canvas",
+      "callback": "Callback"
     }
   },
 
@@ -44,7 +45,8 @@
       "#ash#/space-simple": [ "#ash#/space-simple.less" ],
       "#butterfly#/sample": [ "#butterfly#/sample.less" ],
       "#3DViewer#/sample": [ "#3DViewer#/sample.less" ],
-      "#canvas#/sample": [ "#canvas#/sample.less" ]
+      "#canvas#/sample": [ "#canvas#/sample.less" ],
+      "#callback#/sample": [ "#callback#/sample.less" ]
     },
     "js": {
     }

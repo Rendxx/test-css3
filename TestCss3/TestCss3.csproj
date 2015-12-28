@@ -31,6 +31,8 @@
     <Content Include="butterfly\sample.js" />
     <Content Include="dice\sample.html" />
     <Content Include="dice\sample.js" />
+    <Content Include="Callback\sample.html" />
+    <Content Include="Callback\sample.js" />
     <Content Include="gulpfile.js" />
     <Content Include="fade\sample.html" />
     <Content Include="fade\sample.js" />
@@ -57,6 +59,7 @@
     <Content Include="ash space\sample.less" />
     <Content Include="butterfly\sample.less" />
     <Content Include="3D Viewer\sample.less" />
+    <Content Include="Callback\sample.less" />
     <None Include="slider\sample.less" />
     <None Include="package.json" />
   </ItemGroup>

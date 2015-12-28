@@ -19,14 +19,16 @@
 
     var end_show = function () {
         msg.html("show");
+        console.log("show");
     };
     var end_hide = function () {
         msg.html("hide");
+        console.log("hide");
     };
 
     var test = $('.test-field');
     var msg = $('.test-msg');
-    //test.bind("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function () { console.log(test.hasClass('hide')); });
+    test.bind("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function () { console.log(test.hasClass('hide')); });
     $('.btn-1').click(function () {
         test.removeClass('hide');
         if (transitionEnd != null) {
